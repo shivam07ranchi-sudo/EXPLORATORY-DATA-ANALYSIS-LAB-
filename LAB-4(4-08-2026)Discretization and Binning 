@@ -1,0 +1,116 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOIDVCDpKqMKeUTvUOuzfFP",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/shivam07ranchi-sudo/EXPLORATORY-DATA-ANALYSIS-LAB-/blob/main/LAB-4(4-08-2026)Discretization%20and%20Binning%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f9cf1eb9"
+      },
+      "source": [
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "c2dc74bc"
+      },
+      "source": [
+        "data = {\n",
+        "    'Age': [25, 30, 45, 35, 22],\n",
+        "    'Salary': [50000, 64000, 120000, 85000, 1200000]\n",
+        "}\n",
+        "df = pd.DataFrame(data)\n",
+        "print(\"Original Data:\\n\", df, \"\\n\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ec6d4dc5"
+      },
+      "source": [
+        "min_max_scaler = MinMaxScaler()\n",
+        "df_min_max = pd.DataFrame(\n",
+        "    min_max_scaler.fit_transform(df),\n",
+        "    columns=df.columns\n",
+        ")\n",
+        "print(\"Min-Max Scaled Data:\\n\", df_min_max, \"\\n\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "eff0d7e2"
+      },
+      "source": [
+        "standard_scaler = StandardScaler()\n",
+        "df_standard = pd.DataFrame(\n",
+        "    standard_scaler.fit_transform(df),\n",
+        "    columns=df.columns\n",
+        ")\n",
+        "print(\"Standardized Data:\\n\", df_standard, \"\\n\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "333039cf"
+      },
+      "source": [
+        "robust_scaler = RobustScaler()\n",
+        "df_robust = pd.DataFrame(\n",
+        "    robust_scaler.fit_transform(df),\n",
+        "    columns=df.columns\n",
+        ")\n",
+        "print(\"Robust Scaled Data:\\n\", df_robust, \"\\n\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "PLD1VBaBE6ZE"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
