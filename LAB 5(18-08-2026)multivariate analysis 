@@ -1,0 +1,138 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOZsiGouAWEUl5LnxtEF2rm",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/shivam07ranchi-sudo/EXPLORATORY-DATA-ANALYSIS-LAB-/blob/main/LAB%205(18-08-2026)multivariate%20analysis%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0eb3872f"
+      },
+      "source": [
+        "import pandas as pd\n",
+        "import seaborn as sns\n",
+        "from scipy import stats\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "df = pd.read_csv(\"https://raw.githubusercontent.com/salemprakash/EDA/main/Data/data.csv\")"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8aa09929"
+      },
+      "source": [
+        "price = df['price'].loc[df['price'] != '?']\n",
+        "pmean = price.astype(float).mean()\n",
+        "df['price'] = df['price'].replace('?', pmean).astype(int)\n",
+        "display(df['price'].head())"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "944b1732"
+      },
+      "source": [
+        "horsepower = df['horsepower'].loc[df['horsepower'] != '?']\n",
+        "hpmean = horsepower.astype(float).mean()\n",
+        "df['horsepower'] = df['horsepower'].replace('?', hpmean).astype(int)\n",
+        "display(df['horsepower'].head())"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f81fa818"
+      },
+      "source": [
+        "normalized_losses_series = df['normalized-losses'].loc[df['normalized-losses'] != '?']\n",
+        "nl_mean = normalized_losses_series.astype(float).mean()\n",
+        "df['normalized-losses'] = df['normalized-losses'].replace('?', nl_mean).astype(int)\n",
+        "display(df['normalized-losses'].head())"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "52db69c2"
+      },
+      "source": [
+        "display(df.dtypes)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0e40563e"
+      },
+      "source": [
+        "corr = stats.pearsonr(df[\"price\"], df[\"horsepower\"])\n",
+        "print(\"p-value:\\t\", corr[1])\n",
+        "print(\"cor:\\t\\t\", corr[0])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6a24a1b8"
+      },
+      "source": [
+        "correlation = df.corr(method='pearson', numeric_only=True)\n",
+        "display(correlation)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "d1d68028"
+      },
+      "source": [
+        "plt.figure(figsize=(10, 8))\n",
+        "sns.heatmap(correlation, xticklabels=correlation.columns, yticklabels=correlation.columns, annot=True, cmap='coolwarm', fmt=\".2f\")\n",
+        "plt.title('Correlation Matrix of Numerical Features')\n",
+        "plt.show()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
